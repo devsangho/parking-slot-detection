@@ -1,6 +1,7 @@
 import cv2
 import numpy as np
 
+
 def draw_using_cv(
     img,
     visible_outer_corners,
@@ -8,9 +9,10 @@ def draw_using_cv(
     auxiliary_inner_corners,
     outer_pairs,
     slots,
+    goals,
 ):
     if img is None:
-        img = np.zeros((480, 480, 3))
+        img = np.zeros((500, 500, 3))
     for corner in visible_outer_corners:
         # cv2.circle(img, np.int32(corner.loc), 10, (0, 0, 255), 1)
         for direction in corner.directions:
@@ -104,6 +106,21 @@ def draw_using_cv(
             np.int32(pair[1].loc),
             (0, 128, 0),
             2,
+        )
+    for goal in goals:
+        loc = goal['loc']
+        direction = goal['direction']
+        dx = direction[0] * 20
+        dy = direction[1] * 20
+        
+        destination_x, destination_y = loc[0] + dx, loc[1] + dy
+        cv2.arrowedLine(
+            img,
+            np.int32(loc),
+            np.int32([destination_x, destination_y]),
+            (0, 255, 255),
+            3,
+            tipLength=0.3,
         )
     cv2.imshow(f"detected slots: {len(slots)}, outer pairs: {len(outer_pairs)}", img)
     cv2.waitKey(0)
