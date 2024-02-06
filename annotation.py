@@ -8,8 +8,8 @@ import argparse
 parser = argparse.ArgumentParser(description="corner_annotation")
 parser.add_argument("--trial", required=True)
 parser.add_argument("--dataset", default="data")
-parser.add_argument("--img_size", default=(480, 480), type=int)
-parser.add_argument("--bb_size", default=20, type=int)
+parser.add_argument("--img_size", default=(500, 500), type=int)
+parser.add_argument("--bb_size", default=10, type=int)
 
 args = parser.parse_args()
 
