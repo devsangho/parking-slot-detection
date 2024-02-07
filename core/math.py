@@ -1,7 +1,7 @@
 import numpy as np
 from shapely.geometry import Polygon
 
-THRESHOLD_OF_ANGLE = 20
+THRESHOLD_OF_ANGLE = 5
 
 
 def is_opposite_direction(

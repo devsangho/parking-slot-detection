@@ -3,7 +3,7 @@ import numpy as np
 
 
 def estimate_inner_corner(outer_corner, auxiliary_inner_corner, is_outer_pair_long):
-    length = 45 if is_outer_pair_long else 100  # 임시
+    length = 45 if is_outer_pair_long else 123
     dx, dy = np.array(auxiliary_inner_corner.loc) - np.array(outer_corner.loc)
     angle = np.arctan2(dy, dx)
     estimated_loc = np.array(outer_corner.loc) + np.array(

@@ -114,7 +114,7 @@ def pairing_between_outer_pair_and_inner_vectors(
         else False
     )
     MIN_DISTANCE_BETWEEN_OUTER_AND_INNER = 50 if is_outer_pair_long else 80
-    MAX_DISTANCE_BETWEEN_OUTER_AND_INNER = 100 if is_outer_pair_long else 100
+    MAX_DISTANCE_BETWEEN_OUTER_AND_INNER = 100 if is_outer_pair_long else 140
     if len(inner_corners) == 0 and len(auxiliary_inner_corners) == 0:
         return None
 
