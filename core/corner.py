@@ -54,7 +54,18 @@ def convert_to_corners(image, labels) -> Corner:
         cropped_image = extracted_image[
             top_left_y:bottom_right_y, top_left_x:bottom_right_x
         ]
-        # print('cropped_image shape:', cropped_image.shape)
+        # 이미지의 끝쪽에 corner가 잡힐 경우, 잘라낸 이미지의 크기가 작아지게 되어 문제가 발생함.
+        # 그래서 20 * 20 * 3 사이즈를 기준으로 빈공간은 BLACK으로 채워넣어 사이즈를 맞춰준다.
+        pt, px, pb = np.array([20, 20, 3]) - np.array(cropped_image.shape)
+        cropped_image = cv2.copyMakeBorder(
+            cropped_image,
+            pt,
+            pb,
+            int(px / 2),
+            int(px / 2),
+            cv2.BORDER_CONSTANT,
+            value=(0, 0, 0),
+        )
 
         type = None
         if cls == 0:
