@@ -6,6 +6,7 @@ from core.paring import (
     pairing_between_outer_pair_and_inner_vectors,
 )
 from core.corner import convert_to_corners
+from core.pose import infer_goal_pose, is_vacant
 from draw_cv import draw_using_cv
 
 from data.sample_ideal import (
@@ -114,10 +115,10 @@ if __name__ == "__main__":
     # ----------------------------------------#
     # FOR TEST
     # ----------------------------------------#
-    image = np.array(cv2.imread("data/images/1/image_002.png"))
+    image = np.array(cv2.imread("data/images/3/image_356.png"))
     label = []
 
-    with open("data/labels/1/image_002.txt", "r") as file:
+    with open("data/labels/3/image_356.txt", "r") as file:
         for line in file:
             values = [np.float32(val) for val in line.split()]
             label.append(values)
@@ -166,6 +167,7 @@ if __name__ == "__main__":
                 ],
             )
         )
+        goals = list(filter(lambda pose: is_vacant(image, pose), [infer_goal_pose(slot) for slot in slots]))
         # end = time.time()
         # print("걸린 시간:", end - start, "sec")
         draw_using_cv(
@@ -175,6 +177,7 @@ if __name__ == "__main__":
             auxiliary_inner_corners,
             outer_pairs,
             slots,
+            goals,
         )
         # goals = [infer_goal_pose(slot) for slot in slots]
         # publish_goal_pose_to_ros2(goals)

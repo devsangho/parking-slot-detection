@@ -1,7 +1,6 @@
 import numpy as np
 
 
-# todo
 def is_vacant(image, goal_pose):
     """
     포즈를 추정한 곳에 이미 차가 세워져있는지 판단하는 작업
@@ -14,9 +13,10 @@ def is_vacant(image, goal_pose):
         [type]: [description]
     """
     loc = goal_pose["loc"]
-    print(image[np.int32(loc[1])][np.int32(loc[0])])
-    
-    if np.array_equal(image[np.int32(loc[1])][np.int32(loc[0])], [128, 64, 128]):
+
+    if np.array_equal(
+        image[np.int32(loc[1])][np.int32(loc[0])], [128, 64, 128]
+    ):  # 중점이 지면인 경우에만 vacant로 판단한다.
         return True
     return False
 
