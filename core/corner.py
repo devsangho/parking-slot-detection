@@ -23,7 +23,7 @@ def convert_to_corners(image, labels) -> Corner:
         result = cv2.bitwise_and(image, image, mask=img_mask)
         return result
 
-    target_color = [157, 243, 50]
+    target_color = [157, 234, 50]
     tolerance = 20
     lower_color = np.array(
         [
@@ -42,9 +42,9 @@ def convert_to_corners(image, labels) -> Corner:
 
     extracted_image = bgrExtraction(image, lower_color, upper_color)
     for cls, cx, cy, w, h in labels:
-        center_x = 480 * cx
-        center_y = 480 * cy
-        size = 480 * w
+        center_x = 500 * cx
+        center_y = 500 * cy
+        size = 500 * w
 
         top_left_x = int(center_x - size / 2)
         top_left_y = int(center_y - size / 2)
@@ -99,7 +99,7 @@ def convert_to_corners(image, labels) -> Corner:
 
         # 임계값을 넘는 각도의 인덱스 찾기
         # threshold = 2.5  # 임의의 임계값 (원하는 값으로 설정 가능)
-        threshold = 2
+        threshold = 2.5
         threshold_indices = np.where(histogram > threshold)[0]
 
         # 인덱스에 해당하는 각도와 빈도수 추출
@@ -108,7 +108,7 @@ def convert_to_corners(image, labels) -> Corner:
 
         # 빈도수를 기준으로 내림차순으로 정렬하여 상위 3개의 각도 선택
         # sorted_indices = np.argsort(selected_frequencies)[::-1][:4]
-        sorted_indices = np.argsort(selected_frequencies)[::-1]
+        sorted_indices = np.argsort(selected_frequencies)[::-1][:4]
         top_3_angles = selected_angles[sorted_indices]
         top_3_frequencies = selected_frequencies[sorted_indices]
 
